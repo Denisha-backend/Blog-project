@@ -1,0 +1,70 @@
+<%- include('./Layouts/header') %>
+
+<main class="app-main">
+    <div class="app-content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">Blog Categories</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">View Category</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="app-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4">
+                        <div class="card-header animate__animated animate__fadeIn">
+                            <h3 class="card-title">View Category</h3>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 10px">No.</th>
+                                        <th>Image</th>
+                                        <th>Status</th>
+                                        <th>title</th>
+                                        <th>Description</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% ViewBlog.map((v, i) => { %>
+                                        <tr class="animate__animated animate__fadeIn">
+                                            <td><%= ++i %></td>
+                                            <td>
+                                                <img src="<%= v.image %>" alt="Blog Image" width="100" class="animate__animated animate__fadeIn">
+                                            </td>
+                                            <td><%= v.status %></td>
+                                            <td><%= v.blogtitle %></td>
+                                            <td><%- v.description.substring(0,1000) %></td>
+                                            <td class="d-flex justify-content-around">
+                                                <a href="/Blog/deleteBlogData/<%= v.id %>" class="p-2">
+                                                    <i class="bi bi-trash3"></i>
+                                                </a>
+                                                <a href="/Blog/UpdateBlog/<%= v.id %>" class="">
+                                                    <i class="bi bi-pencil-square"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('./Layouts/footer') %>

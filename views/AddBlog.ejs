@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catagory</title>
+</head>
+
+<body>
+
+
+    <%- include('./Layouts/header')%>
+        <main class="app-main">
+            <!--begin::App Content Header-->
+            <div class="app-content-header">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h3 class="mb-0">Blog</h3>
+                        </div>
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-end">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Blog</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::App Content Header-->
+            <!--begin::App Content-->
+            <div class="app-content">
+                <!--begin::Container-->
+                <div class="container-fluid">
+                    <!--begin::Row-->
+                    <div class="row g-4">
+                        <!--begin::Col-->
+                        <div class="col-12">
+                            <div class="callout callout-info">
+                                For detailed documentation of Form visit
+                                <a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank"
+                                    rel="noopener noreferrer" class="callout-link">
+                                    Bootstrap Form
+                                </a>
+                            </div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-12">
+                            <!--begin::Quick Example-->
+
+                            <!--end::Quick Example-->
+
+                            <!--end::Input Group-->
+                            <!--begin::Horizontal Form-->
+                            <div class="card card-warning card-outline mb-4">
+                                <!--begin::Header-->
+                                <div class="card-header">
+                                    <div class="card-title">Blog</div>
+                                </div>
+                                <!--end::Header-->
+                                <!--begin::Form-->
+                               
+                                        <form method="post" action="/Blog/insertBlog" enctype="multipart/form-data">
+                                            <!--begin::Body-->
+                                            <div class="card-body">
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label">Category</label>
+                                                    <div class="col-md-10">
+                                                        <select class="form-select" name="categoryId">
+                                                            <option value="">--Select Category--</option>
+                                                            <% categoryList.map((v,i)=>{ %>
+                                                                <option value="<%= v.id %>">
+                                                                    <%= v.category %>
+                                                                </option>
+                                                                <% }) %>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label">Title</label>
+                                                    <div class="col-sm-10">
+                                                        <input type="text" class="form-control" id="inputEmail3"
+                                                            name="blogtitle" />
+                                                    </div>
+
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label">Image</label>
+                                                    <div class="col-md-10">
+                                                        <input type="file" name="image" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <label for="inputEmail3"
+                                                        class="col-sm-2 col-form-label">Descreption</label>
+                                                    <div class="col-sm-10">
+                                                        <textarea class="form-control" id="inputEmail3"
+                                                            name="description" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button type="submit" class="btn btn-warning">Add Blog</button>
+                                                    <button type="submit" class="btn float-end">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <%- include('./Layouts/footer')%>
+
+            <script
+                src="https://cdn.tiny.cloud/1/46gozesb5vn02vzqgwktwf8m9d4wjm4qum89d0l0607padv5/tinymce/7/tinymce.min.js"
+                referrerpolicy="origin"></script>
+
+            <script>
+                tinymce.init({
+                    selector: 'textarea',
+                    plugins: [
+                        // Core editing features
+                        'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                        // Your account includes a free trial of TinyMCE premium features
+                        // Try the most popular premium features until Feb 5, 2025:
+                        'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+                    ],
+                    toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                    tinycomments_mode: 'embedded',
+                    tinycomments_author: 'Author name',
+                    mergetags_list: [
+                        { value: 'First.Name', title: 'First Name' },
+                        { value: 'Email', title: 'Email' },
+                    ],
+                    ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+                });
+            </script>
+
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+
+<%- include('./Layouts/header')%>
+<main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6"><h3 class="mb-0">update form</h3></div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">General Form</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+    <!--begin::App Content-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row g-4">
+          <!--begin::Col-->
+          <div class="col-12">
+            <div class="callout callout-info">
+              For detailed documentation of Form visit
+              <a
+                href="https://getbootstrap.com/docs/5.3/forms/overview/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="callout-link"
+              >
+                Bootstrap Form
+              </a>
+            </div>
+          </div>
+          <!--end::Col-->
+          <!--begin::Col-->
+          <div class="col-md-6">
+            <!--begin::Quick Example-->
+         
+            <!--end::Quick Example-->
+         
+            <!--end::Input Group-->
+            <!--begin::Horizontal Form-->
+            <div class="card card-warning card-outline mb-4">
+              <!--begin::Header-->
+              <div class="card-header"><div class="card-title"> Form</div></div>
+              <!--end::Header-->
+              <!--begin::Form-->
+            
+              <form method="post" action="/editdata" enctype="multipart/form-data">
+                <input type="text" name="id" value="<%= singleAdmin.id %>"/>
+                <!--begin::Body-->
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">FirstName:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="fname" name="fname" value="<%= singleAdmin.name%>" />
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label for="inputEmail3" class="col-sm-2 col-form-label">Lastname:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" id="lname" name="lname" />
+                        </div>
+                      </div>
+                  <div class="row mb-3">
+                    <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail3" name="email"  value="<%= singleAdmin.email%>"/>
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="inputPassword3"  name="password" value="<%= singleAdmin.password%>"/>
+                    </div>
+                  </div>
+                  <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender"
+                          value="male"  <% if(singleAdmin.gender == 'male'){ %> <%= 'checked' %> <% } %>
+                        />male
+                       
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender"
+                          value="female"  <% if(singleAdmin.gender == 'male'){ %> <%= 'checked' %> <% } %>
+                         
+                        />female
+                       
+                      </div>
+                     
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">message</span>
+                        <textarea class="form-control" aria-label="With textarea" name="message"><%= singleAdmin.message%></textarea>
+                      </div>
+                    </div>
+                
+
+                  <div class="row mb-3">
+                 <label for="inputPassword3" class="col-sm-2 col-form-label">Hobby :</label>
+                 <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="reading" id="flexCheckDefault" name="hobby" <% if(singleAdmin.hobby.includes('reading') ) { %> <%= 'checked' %>  <% }  %>>
+                    <label class="form-check-label" for="flexCheckDefault">
+                      reading
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="typing" id="flexCheckChecked"  name="hobby" <% if(singleAdmin.hobby.includes('typing') ) { %> <%= 'checked' %>  <% }  %>>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        typing
+                    </label>
+                    </div>
+                  </div>
+                </div>
+                    
+                  <div class="col-md-6">
+                    <label for="validationCustom04" class="form-label">City</label>
+                    <select class="form-select" name="city">
+                        <option selected disabled value="">Choose City...</option>
+                        <% CityName=['Surat' , 'Rajkot' , 'Ahemdabad' , 'Vdodra' ] %>
+                            <% CityName.map((v)=> { %>
+                                <option value="<%= v %>" <% if(singleAdmin.city == v) { %> <%= 'selected' %> <% } %> >
+                                    <%= v %>
+                                </option>
+                                <% }) %>
+                    </select>
+                    <div class="invalid-feedback">Please select a valid state.</div>
+                </div>
+
+                
+                <div class="input-group mt-3 mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02"  name="image"/>
+                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    <img src="<%= singleAdmin.image %>" height="100"/>
+                  </div>
+
+                  <div class="card-footer">
+                    <input type="submit" name="submit" value="update"/>
+                    <button type="submit" class="btn float-end">Cancel</button>
+                  </div>
+          </div>
+                
+                <!--end::Body-->
+                <!--begin::Footer-->
+                
+                <!--end::Footer-->
+              </form>
+              <!--end::Form-->
+            </div>
+            <!--end::Horizontal Form-->
+          </div>
+          <!--end::Col-->
+   
+          <!--end::Col-->
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content-->
+  </main>
+
+<%- include('./Layouts/footer')%>

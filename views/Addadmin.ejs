@@ -1,0 +1,195 @@
+<%- include('./Layouts/header') %>
+  <main class="app-main">
+    <!--begin::App Content Header-->
+    <div class="app-content-header">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row">
+          <div class="col-sm-6">
+            <h3 class="mb-0">General Form</h3>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-end">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">General Form</li>
+            </ol>
+          </div>
+        </div>
+        <!--end::Row-->
+      </div>
+      <!--end::Container-->
+    </div>
+    <!--end::App Content Header-->
+
+    <!--begin::App Content-->
+    <div class="app-content">
+      <!--begin::Container-->
+      <div class="container-fluid">
+        <!--begin::Row-->
+        <div class="row g-4">
+          <!--begin::Col-->
+          <div class="col-12">
+            <div class="callout callout-info">
+              For detailed documentation of Form visit
+              <a href="https://getbootstrap.com/docs/5.3/forms/overview/" target="_blank" rel="noopener noreferrer"
+                class="callout-link">
+                Bootstrap Form
+              </a>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="card card-warning card-outline mb-4">
+              <div class="card-header">
+                <div class="card-title"> Form</div>
+              </div>
+              <form method="post" action="/insertdata" enctype="multipart/form-data">
+                <div class="card-body">
+
+                  <!-- First Name -->
+                  <div class="row mb-3">
+                    <label for="fname" class="col-sm-2 col-form-label">FirstName:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="fname" name="fname" value="<%= old?.fname || '' %>" />
+                      <% if (errorData?.fname) { %>
+                        <span class="text-danger">
+                          <%= errorData.fname.msg %>
+                        </span>
+                        <% } %>
+                    </div>
+                  </div>
+
+                  <!-- Last Name -->
+                  <div class="row mb-3">
+                    <label for="lname" class="col-sm-2 col-form-label">LastName:</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" id="lname" name="lname" value="<%= old?.lname || '' %>" />
+                      <% if (errorData?.lname) { %>
+                        <span class="text-danger">
+                          <%= errorData.lname.msg %>
+                        </span>
+                        <% } %>
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="row mb-3">
+                    <label for="email" class="col-sm-2 col-form-label">Email:</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="email" name="email"
+                        value="<%= old?.email || '' %>" />
+                      <% if (errorData?.email) { %>
+                        <span class="text-danger">
+                          <%= errorData.email.msg %>
+                        </span>
+                        <% } %>
+                    </div>
+                  </div>
+
+                  <!-- Password -->
+                  <div class="row mb-3">
+                    <label for="password" class="col-sm-2 col-form-label">Password:</label>
+                    <div class="col-sm-10">
+                      <input type="password" class="form-control" id="password" name="password"
+                        value="<%= old?.password || '' %>" />
+                      <% if (errorData?.password) { %>
+                        <span class="text-danger">
+                          <%= errorData.password.msg %>
+                        </span>
+                        <% } %>
+                    </div>
+                  </div>
+
+                  <!-- Gender -->
+                  <fieldset class="row mb-3">
+                    <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="male" <%=old?.gender==='male'
+                          ? 'checked' : '' %> /> Male
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" value="female"
+                          <%=old?.gender==='female' ? 'checked' : '' %> /> Female
+                      </div>
+                      <% if (errorData?.gender) { %>
+                        <span class="text-danger">
+                          <%= errorData.gender.msg %>
+                        </span>
+                        <% } %>
+                    </div>
+                  </fieldset>
+
+                  <!-- Message -->
+                  <div class="input-group">
+                    <span class="input-group-text">Message</span>
+                    <textarea class="form-control" name="message"><%= old?.message || '' %></textarea>
+                  </div>
+                  <% if (errorData?.message) { %>
+                    <span class="text-danger">
+                      <%= errorData.message.msg %>
+                    </span>
+                    <% } %>
+                      <!-- Hobby -->
+                      <div class="row mb-3">
+                        <label for="hobby" class="col-sm-2 col-form-label">Hobby:</label>
+                        <div class="col-sm-10">
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="reading" name="hobby"
+                              <%=old?.hobby?.includes('reading') ? 'checked' : '' %> />
+                            <label class="form-check-label" for="reading">Reading</label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="typing" name="hobby"
+                              <%=old?.hobby?.includes('typing') ? 'checked' : '' %> />
+                            <label class="form-check-label" for="typing">Typing</label>
+                          </div>
+                          <% if (errorData?.hobby) { %>
+                            <span class="text-danger">
+                              <%= errorData.hobby.msg %>
+                            </span>
+                            <% } %>
+                        </div>
+                      </div>
+
+                      <!-- City -->
+                      <div class="row mb-3">
+                        <label for="city" class="col-sm-2 col-form-label">City:</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" name="city">
+                            <option selected disabled value="">Choose City...</option>
+                            <% const CityName=['Surat', 'Rajkot' , 'Ahmedabad' , 'Vadodara' ]; %>
+                              <% CityName.forEach(city=> { %>
+                                <option value="<%= city %>" <%=old?.city===city ? 'selected' : '' %>><%= city %>
+                                </option>
+                                <% }); %>
+                          </select>
+                          <% if (errorData?.city) { %>
+                            <span class="text-danger">
+                              <%= errorData.city.msg %>
+                            </span>
+                            <% } %>
+                        </div>
+                      </div>
+
+                      <!-- File Upload -->
+                      <div class="input-group mt-3 mb-3">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="image" />
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                      </div>
+
+                </div>
+
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-warning">Submit</button>
+                  <a href="/" class="btn float-end">Cancel</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <%- include('./Layouts/footer') %>

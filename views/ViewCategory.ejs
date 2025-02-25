@@ -1,0 +1,132 @@
+i<%- include('./Layouts/header') %>
+<main class="app-main">
+    <div class="app-content-header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="mb-0">Category Management</h3>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-end">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">View Category</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header">
+                            <h3 class="card-title">View Category</h3>
+                        </div>
+                        <div class="card-body">
+                            <form action="">
+                                <input type="text" name="search">
+                            </form>
+
+                            <form method="post" action="/category/deleteMultipleCategory">
+
+                            <table class="table table-bordered table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>
+                                            <input type="checkbox" id="checkAll"/>
+                                            <button type="submit" id="deleteAll"><i class="bi bi-trash3"></i></button>
+                                        </th>
+                                        <th style="width: 10px">#</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% category.map((v,i) => { %>
+                                    <tr class="animate__animated animate__fadeIn animate__delay-1s">
+                                        <td><input type='checkbox' id='checkItem' name="Ids" value="<%= v.id %>" /></td>
+                                        <th scope="row">
+                                            <%= ++i %>
+                                        </th>
+                                        <td>
+                                            <%= v.category %>
+                                        </td>
+                                        <td>
+                                            <% if(v.status){%>
+                                            <a href="/category/changeStatus/?catId=<%= v.id %>&status=true" class="btn btn-success">Active</a>
+                                            <% } else { %>                                            
+                                                <a class="btn btn-danger" href="/category/changeStatusTrue/?catId=<%= v.id %>&status=false">Deactive</a>
+                                            <% } %>
+                                        </td>
+                                        <td class="d-flex justify-content-around">
+                                            <a href="/category/deleteData/<%= v.id %>" class="btn btn-danger btn-sm animate__animated animate__fadeIn animate__delay-2s">
+                                                <i class="bi bi-trash3"></i> Delete
+                                            </a>
+                                            <a href="/category/UpdateCategory/<%= v.id %>" class="btn btn-primary btn-sm animate__animated animate__fadeIn animate__delay-2s">
+                                                <i class="bi bi-pencil-square"></i> Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+                                </tbody>
+                            </table>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    
+</script>
+<%- include('./Layouts/footer') %>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+<script>
+
+$("#deleteAll").hide();
+
+$("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+    $("#deleteAll").toggle();
+});
+</script>
+
+<!-- Add necessary scripts for Bootstrap and animation -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"></script>
+
+
+
+<style>
+    /* Custom animation for row */
+    .animate__animated {
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+    .animate__fadeIn {
+        animation-name: fadeIn;
+    }
+
+    /* Button hover animation */
+    .btn:hover {
+        transform: translateY(-5px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Table hover effect */
+    .table-hover tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+
+
+

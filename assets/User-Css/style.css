@@ -1,0 +1,8 @@
+.single-post{
+    border-right: 1px dotted black;
+    padding:10px;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
